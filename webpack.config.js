@@ -2,6 +2,12 @@ const path = require('path');
 const merge = require('lodash.merge');
 const stories = require('./stories');
 
+const story_configs = {
+    specific_story: {
+        specific_property: "specific_value"
+    }
+};
+
 const config = stories.map(story => {
     const common = {
         mode: 'development',
@@ -19,7 +25,7 @@ const config = stories.map(story => {
         }
     };
 
-    return merge({}, common, story.config);
+    return merge({}, common, story_configs[story.name], story.config);
 });
 
 console.log(JSON.stringify(config, null, 2));
