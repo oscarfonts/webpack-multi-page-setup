@@ -1,13 +1,4 @@
-var readjson = require('readjson');
+import shared1 from "shared1";
 
-
-readjson('../package.json', function(error, json) {
-    if (error)
-        console.error(error.message);
-    else
-        console.log([
-            json.name, json.version
-        ].join(' '));
-});
-
+shared1();
 console.log("story1");

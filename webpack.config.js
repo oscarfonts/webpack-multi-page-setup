@@ -1,13 +1,13 @@
-const {resolve} = require('path')
-const {readdirSync, statSync} = require('fs')
-const {join} = require('path')
+const {resolve} = require('path');
+const {readdirSync, statSync} = require('fs');
+const {join} = require('path');
 
-const dirs = p => readdirSync(p).filter(f => statSync(join(p, f)).isDirectory())
+const dirs = p => readdirSync(p).filter(f => statSync(join(p, f)).isDirectory());
 
 // multi-compiler mode
 
 const config = dirs(resolve(__dirname, "stories")).map((project) => {
-    const home = join(__dirname, "stories", project)
+    const home = join(__dirname, "stories", project);
     return {
         mode: "development",
         entry: join(home, "src", "index.js"),
@@ -16,9 +16,16 @@ const config = dirs(resolve(__dirname, "stories")).map((project) => {
         },
         output: {
             filename: 'bundle.js',
-            path: join(home, 'dist')
+            path: join(home, 'dist'),
+            publicPath: ['', 'stories', project, 'dist', ''].join('/')
+        },
+        devServer: {
+            contentBase: resolve(__dirname),
+            inline: false
         }
     }
-})
+});
 
-module.exports = config
+console.log(config);
+
+module.exports = config;
