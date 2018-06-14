@@ -12,20 +12,16 @@ const config = dirs(resolve(__dirname, "stories")).map((project) => {
         mode: "development",
         entry: join(home, "src", "index.js"),
         resolve: {
-            modules: [join(home, 'node_modules')]
+            modules: [join(home, 'node_modules'), 'node_modules']
         },
         output: {
             filename: 'bundle.js',
             path: join(home, 'dist'),
             publicPath: ['', 'stories', project, 'dist', ''].join('/')
-        },
-        devServer: {
-            contentBase: resolve(__dirname),
-            inline: false
         }
     }
 });
 
-console.log(config);
+// console.log(config);
 
 module.exports = config;
