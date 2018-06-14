@@ -1,5 +1,5 @@
 {
-  "name": "story1",
+  "name": "stub",
   "version": "0.0.1",
   "description": "",
   "private": true,
@@ -7,8 +7,5 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "MIT",
-  "dependencies": {
-    "shared1": "file:../../shared/shared1"
-  }
+  "license": "MIT"
 }

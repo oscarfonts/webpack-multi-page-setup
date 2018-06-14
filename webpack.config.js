@@ -1,27 +1,27 @@
-const {resolve} = require('path');
-const {readdirSync, statSync} = require('fs');
-const {join} = require('path');
+const path = require('path');
+const merge = require('lodash.merge');
+const stories = require('./stories');
 
-const dirs = p => readdirSync(p).filter(f => statSync(join(p, f)).isDirectory());
-
-// multi-compiler mode
-
-const config = dirs(resolve(__dirname, "stories")).map((project) => {
-    const home = join(__dirname, "stories", project);
-    return {
-        mode: "development",
-        entry: join(home, "src", "index.js"),
+const config = stories.map(story => {
+    const common = {
+        mode: 'development',
+        entry: path.join(story.path, 'src', 'index.js'),
         resolve: {
-            modules: [join(home, 'node_modules'), 'node_modules']
+            modules: [path.join(story.path, 'node_modules'), 'node_modules'],
+            alias: {
+                shared: path.resolve(__dirname, 'shared')
+            }
         },
         output: {
             filename: 'bundle.js',
-            path: join(home, 'dist'),
-            publicPath: ['', 'stories', project, 'dist', ''].join('/')
+            path: story.path,
+            publicPath: `/stories/${story.name}/`
         }
-    }
+    };
+
+    return merge({}, common, story.config);
 });
 
-// console.log(config);
+console.log(JSON.stringify(config, null, 2));
 
 module.exports = config;
