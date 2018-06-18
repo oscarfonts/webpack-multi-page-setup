@@ -12,6 +12,7 @@ This repo illustrates a way to setup a project and webpack configuration to meet
 
 ## NPM tasks
 
+* `npm run install-all`: Installs dependencies for all of the pages.
 * `npm start`: Runs the webpack-dev-server with auto-reload capabilities.
 * `npm run build`: Builds the bundles in production mode.
 
